@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunal-Suryawanshi</title>
+    <meta name="description" content="This is a website demonstrating automatic scrolling using JavaScript.">
+    <meta name="author" content="Your Name">
+    <meta name="keywords" content="automatic scroll, website, JavaScript">
+    <link rel="stylesheet" href="styles.css">
+    <title>Kunal Suryawanshi - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e6e6e6;
+            font-family: 'Roboto', sans-serif;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .terminal {
+    background-color: #333333;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-y: auto;
+    /* Remove max-height */
+    /* max-height: 400px; */
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    margin-bottom: 1.5rem;
+    /* Set a height to fill the viewport */
+    height: calc(100vh - 100px); /* Adjust 100px according to your header height */
+}
+
+
+        .input-line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .prompt {
+            color: #98c379;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        .input {
+            flex-grow: 1;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            color: #e6e6e6;
+            padding: 0.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+
+        .command {
+            color: #61afef;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-4 text-center">Kunal Suryawanshi - Portfolio</h1>
+        <div class="terminal" id="terminal">
+            <div class="input-line">
+                <span class="prompt">C:\Users\Kunal></span>
+                <div class="input" contenteditable="true" id="input"></div>
+            </div>
+        </div>
+    </div>
+    <header>
+        
+    </header>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const inputLine = document.querySelector('.input-line');
+        const input = document.getElementById('input');
+
+        const commands = {
+            'help': `Available commands:<br>
+            - about<br>
+            - education<br>
+            - projects<br>
+            - internships<br>
+            - skills<br>
+            - research<br>
+            - certifications<br>
+            - languages<br>
+            - interests<br>
+            - info`, // Added 'info' command
+            'about': `Kunal Suryawanshi<br>
+            Location: Pune, India<br>
+            Phone: +91 9921048902<br>
+            Email: kunalsuryawanshi6066@gmail.com<br>
+            LinkedIn: linkedin.com/in/kunal-suryawanshi-1a8851190<br>
+            GitHub: github.com/K-Rocksk007iam`,
+            'education': `Education<br>
+            Bachelor of Engineering 2020 – 2023<br>
+            ALARD College of Engineering, Pune, India Percentage: 81.08%<br>
+            Diploma 2017 – 2020<br>
+            Government Polytechnic Nashik, Nashik, India Percentage: 80%<br>
+            10th 2017<br>
+            Purushottam English School, Nashik, India Percentage: 87.60%`,
+            'projects': `Projects<br>
+            Hospital Management System | Java, Spring Tool Suite, HTML, Angular Framework | <a href="https://github.com/K-Rocksk007iam/Hospital-Management" target="_blank">GitHub</a><br>
+            • Developed a user-friendly Hospital Management System using Java, Spring Tool Suite, Angular, and HTML<br>
+            • Implemented Angular for enhanced frontend interactivity, simplifying navigation and improving user experience<br>
+            • Streamlined workflows and centralized information, contributing to improved patient care and administrative efficiency<br>
+            Path Finding Visualizer Application | HTML, CSS, JavaScript, React Framework | <a href="https://github.com/K-Rocksk007iam/Path-Finding-Visualizer" target="_blank">GitHub</a><br>
+            • Led the completion of all tasks in the project, delivering a fully-functional, user-friendly web application<br>
+            • Demystified algorithm workings using HTML, CSS, JavaScript, and React Framework, aiding user understanding<br>
+            • Provided an interactive platform for visualizing pathfinding algorithms, making complex algorithms accessible to users<br>
+            Weather Application System | PHP, MySQL, HTML, CSS, JavaScript | <a href="https://github.com/K-Rocksk007iam/Weather-Detection" target="_blank">GitHub</a><br>
+            • Developed a Weather Application mini project using PHP, MySQL, HTML, CSS, and JavaScript<br>
+            • Implemented server-side scripting with PHP for dynamic content, delivering real-time weather information<br>
+            • Provided a simple and efficient way for users to search for weather conditions, enhancing accessibility and user convenience`,
+            'internships': `Internships<br>
+            Website Designing | Internship Studio, Pune 02/2022 – 03/2022<br>
+            • Task: Successfully designed and developed an e-commerce portal with a focus on user-friendly design<br>
+            • Collaborated with a team under the mentorship of Atul Yadav, gaining insights into e-commerce website design<br>
+            Website Designing | Edit Ocean, Pune 01/2023 – 02/2023<br>
+            • Task: Contributed to the design and development of a website, focusing on enhancing user experience<br>
+            • Interacted closely with the founder, Gaurav Mahale, to align design elements with business goals`,
+            'skills': `Skills<br>
+            Front-End Technologies: HTML5, CSS3, React.js<br>
+            Back-End Technologies: Java (with Spring Boot), Node.js (with Express.js)<br>
+            Database Technologies: SQL (e.g., MySQL), NoSQL (e.g., MongoDB)<br>
+            Programming Languages: C/C++, Java, .NET , JavaScript<br>
+            Other Skills and Knowledge: Object-Oriented Programming (OOP), Data Structures and Algorithms (DSA), Git, Database Management Systems (DBMS), Operating Systems (OS) , Git , Docker`,
+            'research': `Research Papers<br>
+            Shortest Path Finding Visualizer<br>
+            • Published in International Research Journal of Engineering and Technology (IRJET) - Dec 2022<br>
+            • Published in International Journal for Research in Applied Science & Engineering Technology (IJRASET) - May 2023`,
+            'certifications': `Certifications<br>
+              • Developed expertise in Solutions Architecture through practical virtual experience.<br>
+             • Completed the Google Analytics for Beginners course, gaining insights into website analytics.<br>
+             • Achieved certification in Data Science with a focus on E-Commerce applications.<br>
+             • Successfully designed an e-commerce portal during the internship.<br>
+              • Completed Java Basics course on HackerRank.<br>
+              • Completed Java Programming For Complete Beginners course on Udemy.<br>
+              • Completed Natural Language Processing Real-World Projects in Python course on Udemy.<br>
+             • Completed The Complete Python Bootcamp From Zero to Hero in Python course on Udemy.`,
+            'languages': `Languages<br>
+            Proficiency:<br>
+            • English: Professional Working Proficiency<br>
+            • Hindi: Full Professional Proficiency<br>
+            • Marathi: Native or Bilingual Proficiency`,
+            'interests': `Interests<br>
+            • Trekking<br>
+            • Bike Riding<br>
+            • Gaming`,
+            'info': `👋 Hey there! I'm Kunal Suryawanshi, a dynamic and innovative Full Stack Developer based in Pune, India. With a Bachelor of Engineering degree from ALARD College of Engineering, I bring a strong foundation in computer science and a passion for creating impactful solutions.<br><br>
+🎓 During my academic journey, I've consistently excelled, achieving an impressive 81.08% in my Bachelor's program and 80% in my Diploma. I pride myself on my ability to translate theoretical knowledge into practical applications, evident in my diverse range of projects.<br><br>
+💼 In my recent projects, I spearheaded the development of a user-friendly Hospital Management System using Java, Spring Tool Suite, Angular, and HTML, contributing to improved patient care and administrative efficiency. Additionally, I led the creation of a Path Finding Visualizer Application and Weather Application System, leveraging HTML, CSS, JavaScript, and React Framework to deliver intuitive and interactive solutions.<br><br>
+🔧 My technical prowess extends across a spectrum of technologies, including HTML5, CSS3, React.js, Java with Spring Boot, Node.js with Express.js, SQL (MySQL), NoSQL (MongoDB), C/C++, and JavaScript. Moreover, my expertise in Object-Oriented Programming, Data Structures and Algorithms, Git, Database Management Systems, and Operating Systems further strengthens my development capabilities.<br><br>
+🌟 Beyond my technical skills, I've honed my abilities through internships at Internship Studio and Edit Ocean, where I collaborated with industry professionals to design and develop user-centric websites. My dedication to continuous learning is reflected in my certifications in AWS Solutions Architecture, Google Analytics, Data Science in E-Commerce, and Website Designing.<br><br>
+📝 Additionally, I've contributed to academia through research papers published in renowned journals like the International Research Journal of Engineering and Technology (IRJET) and the International Journal for Research in Applied Science & Engineering Technology (IJRASET).<br><br>
+🌐 Fluent in English, Hindi, and Marathi, I thrive in diverse environments and excel in cross-cultural collaborations. Outside of work, I enjoy trekking, bike riding, and gaming, exploring new adventures whenever I can.<br><br>
+📫 Let's connect and explore opportunities to collaborate and innovate! Feel free to reach out via LinkedIn messaging or email at kunalsuryawanshi6066@gmail.com.`
+
+        };
+        window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })
+        function handleInput() {
+            const userInput = input.innerText.trim().toLowerCase();
+            const output = commands[userInput] || `Command not found. Type 'help' to see available commands.`;
+
+            const outputLine = document.createElement('div');
+            outputLine.className = 'input-line';
+            outputLine.innerHTML = `<span class="prompt">C:\Users\Kunal></span><div class="command">${output}</div>`;
+            terminal.insertBefore(outputLine, inputLine);
+
+            input.innerText = '';
+            input.focus();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleInput();
+            }
+        }
+
+        input.addEventListener('keypress', handleKeyPress);
+    </script>
+</body>
+
+</html>
